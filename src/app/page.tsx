@@ -319,7 +319,7 @@ export default function TourismHome() {
                   <img src="https://puravidahuts.com/wp-content/uploads/2021/08/MG_9467.jpg" className="rounded-sm shadow-xl aspect-[4/5] object-cover" alt="Daylight Night" />
                 </div>
                 <div className="space-y-4">
-                  <img src="https://puravidahuts.com/wp-content/uploads/2021/08/MG_9470.jpg" className="rounded-sm shadow-xl aspect-[4/5] object-cover" alt="Hut Exterior" />
+                  <img src="https://puravidahuts.com/wp-content/uploads/2024/06/Pura-Vida-Huts-Vama-Veche-Desene-cu-lumina-134.jpg" className="rounded-sm shadow-xl aspect-[4/5] object-cover" alt="Hut Exterior" />
                   <img src="https://puravidahuts.com/wp-content/uploads/2024/06/Pura-Vida-Huts-Vama-Veche-Desene-cu-lumina-120.jpg" className="rounded-sm shadow-xl aspect-[3/4] object-cover" alt="Beach Night" />
                 </div>
               </div>
