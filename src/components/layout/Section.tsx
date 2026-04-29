@@ -4,7 +4,8 @@ import * as React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface SectionProps extends HTMLMotionProps<"section"> {
+interface SectionProps extends Omit<HTMLMotionProps<"section">, "children"> {
+  children?: React.ReactNode;
   container?: boolean;
   padded?: boolean;
 }
