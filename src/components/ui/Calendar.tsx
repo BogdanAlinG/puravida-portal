@@ -15,7 +15,7 @@ function CustomMonthCaption(props: any) {
   // In v9, the month date is passed via calendarMonth prop
   const currentMonth = props.calendarMonth?.date;
   
-  if (!currentMonth) return null;
+  if (!currentMonth) return <div className="hidden" />;
 
   return (
     <div className="flex flex-col items-center gap-6 mb-8 w-full animate-in fade-in slide-in-from-top-4 duration-700">
@@ -88,7 +88,7 @@ export function Calendar({
       }}
       components={{
         MonthCaption: CustomMonthCaption,
-        Nav: () => null // Handled by custom caption
+        Nav: () => <div className="hidden" /> // Handled by custom caption
       }}
       {...props}
     />
