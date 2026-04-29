@@ -1,65 +1,80 @@
-import Image from "next/image";
+import { Navbar } from "@/components/layout/Navbar";
+import { Hero } from "@/components/layout/Hero";
+import { ProductShowcase } from "@/components/features/ProductShowcase";
+import { Heritage } from "@/components/features/Heritage";
+import { CinematicSection } from "@/components/features/CinematicSection";
+import { Text } from "@/components/ui/Typography";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      <main className="flex-grow">
+        <Hero />
+        
+        {/* Intro / Mission */}
+        <section className="bg-brand-cream py-20 border-b border-brand-charcoal/5">
+          <div className="container mx-auto px-6 md:px-12 text-center">
+            <div className="max-w-3xl mx-auto">
+              <Text className="text-xl md:text-2xl font-serif text-brand-charcoal leading-relaxed">
+                "We believe that luxury shouldn't be confined to static walls. 
+                Our huts are designed for the modern nomad who seeks the perfect 
+                balance between mobility, comfort, and artisanal quality."
+              </Text>
+            </div>
+          </div>
+        </section>
+
+        <ProductShowcase />
+        <Heritage />
+        <CinematicSection />
+        
+        {/* Contact CTA */}
+        <section id="contact" className="bg-brand-charcoal text-brand-cream py-32 overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-terracotta/5 skew-x-12 transform translate-x-1/4" />
+          
+          <div className="container mx-auto px-6 md:px-12 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-4xl md:text-6xl font-serif mb-8">Ready to start your journey?</h2>
+                <p className="text-brand-cream/70 text-lg mb-12 max-w-lg">
+                  Whether you're looking for a permanent residence or a unique 
+                  vacation retreat, we're here to help you choose the perfect model.
+                </p>
+                <div className="flex flex-wrap gap-6">
+                  <a href="mailto:contact@puravidahuts.com" className="text-2xl font-serif border-b-2 border-brand-terracotta hover:text-brand-terracotta transition-colors">
+                    contact@puravidahuts.com
+                  </a>
+                  <span className="text-2xl font-serif text-brand-terracotta">+40 786 258 244</span>
+                </div>
+              </div>
+              
+              <div className="bg-white/5 p-8 md:p-12 backdrop-blur-xl border border-white/10 rounded-sm">
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="Your Name" className="bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-brand-terracotta transition-colors" />
+                    <input type="email" placeholder="Email Address" className="bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-brand-terracotta transition-colors" />
+                  </div>
+                  <select className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-brand-terracotta transition-colors appearance-none">
+                    <option className="bg-brand-charcoal">Select Model</option>
+                    <option className="bg-brand-charcoal">Phoenix XXL</option>
+                    <option className="bg-brand-charcoal">Daylight</option>
+                    <option className="bg-brand-charcoal">Joy</option>
+                  </select>
+                  <textarea placeholder="Message" rows={4} className="w-full bg-transparent border-b border-white/20 py-3 focus:outline-none focus:border-brand-terracotta transition-colors resize-none" />
+                  <button type="submit" className="w-full bg-brand-terracotta text-white py-4 uppercase tracking-widest font-bold hover:bg-brand-terracotta/90 transition-colors">
+                    Send Inquiry
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <Footer />
     </div>
   );
 }
