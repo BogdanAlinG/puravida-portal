@@ -11,10 +11,9 @@ export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function CustomMonthCaption(props: any) {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
-  const { displayMonths } = useDayPicker();
   
-  // Find the month this caption belongs to
-  const currentMonth = props.calendarMonth?.date || displayMonths[0]?.date;
+  // In v9, the month date is passed via calendarMonth prop
+  const currentMonth = props.calendarMonth?.date;
   
   if (!currentMonth) return null;
 
