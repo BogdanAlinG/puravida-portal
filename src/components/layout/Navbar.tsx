@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/Button";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { name: "Huts", href: "/#huts", icon: Tent },
   { name: "Stay", href: "/stay", icon: Bed },
+  { name: "Models", href: "/models", icon: Tent },
   { name: "Buy", href: "/buy", icon: Info },
   { name: "Press", href: "/press", icon: Newspaper },
   { name: "FAQ", href: "/faq", icon: LayoutGrid },
@@ -75,7 +75,7 @@ export const Navbar = () => {
             </Link>
           ))}
           <Link href="/#contact">
-            <Button size="sm">Book a Consultation</Button>
+            <Button size="sm">Inquire Now</Button>
           </Link>
         </div>
 
@@ -109,7 +109,7 @@ export const Navbar = () => {
               </Link>
             ))}
             <Link href="/#contact" onClick={() => setIsOpen(false)}>
-              <Button className="w-full">Book a Consultation</Button>
+              <Button className="w-full">Inquire Now</Button>
             </Link>
           </div>
         </motion.div>

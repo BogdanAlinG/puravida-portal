@@ -7,41 +7,8 @@ import { H1, H2, H3, Text, Accent } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { MapPin, Waves, Mountain, Building2 } from "lucide-react";
 import { StayBookingModal } from "@/components/features/StayBookingModal";
-
-const locations = [
-  {
-    name: "Vama Veche Sea Side Village",
-    description: "The ultimate tiny house experience right on the beach. A perfect blend of chill daytime vibes and vibrant party nights in Romania's most famous seaside village.",
-    price: "From €80/night",
-    icon: Waves,
-    image: "https://puravidahuts.com/wp-content/uploads/2024/06/Pura-Vida-Huts-Vama-Veche-Desene-cu-lumina-134.jpg",
-    details: ["Beachfront Access", "Tiny House Cluster", "Vibrant Atmosphere"]
-  },
-  {
-    name: "Mamaia Nord Studios & Penthouses",
-    description: "20 brand new studios, apartments, and 3 dream Penthouses. Located just 400m from the beach, fully equipped with premium appliances including air fryers and coffee makers.",
-    price: "From 400 RON/night",
-    icon: Building2,
-    image: "https://puravidahuts.com/wp-content/uploads/2023/07/IMG-20230711-WA0102-scaled.jpg",
-    details: ["Sea View Terrace", "Modern Design", "Full Kitchenette"]
-  },
-  {
-    name: "Bucovina Garden Retreat",
-    description: "Located in Câmpulung Moldovenesc, in the heart of Bucovina. Two tiny houses nestled in a traditional garden near UNESCO protected monasteries. Peace, history, and craftsmanship.",
-    price: "Contact for Rates",
-    icon: Mountain,
-    image: "https://puravidahuts.com/wp-content/uploads/2021/08/MG_9494-scaled.jpg",
-    details: ["Traditional Garden", "UNESCO Proximity", "Mountain Air"]
-  },
-  {
-    name: "Bucharest Central Hub",
-    description: "Experience tiny living in diverse central locations throughout the Romanian capital. Perfect for digital nomads or travelers seeking a unique urban sanctuary.",
-    price: "From €65/night",
-    icon: MapPin,
-    image: "https://puravidahuts.com/wp-content/uploads/2022/05/Phoenix-tiny-house-Pura-Vida-6-scaled.jpeg",
-    details: ["Central Locations", "Urban Sanctuary", "Compact Design"]
-  }
-];
+import { stayLocations } from "@/lib/data/stays";
+import Link from "next/link";
 
 export default function StayPage() {
   const [selectedLocation, setSelectedLocation] = React.useState<string | null>(null);
@@ -61,14 +28,16 @@ export default function StayPage() {
 
         <Section>
           <div className="container mx-auto px-6 space-y-24">
-            {locations.map((loc, index) => (
-              <div key={index} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 items-center`}>
+            {stayLocations.map((loc, index) => (
+              <div key={loc.slug} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 items-center`}>
                 <div className="w-full lg:w-1/2 aspect-[16/10] overflow-hidden rounded-sm shadow-2xl relative group">
-                  <img 
-                    src={loc.image} 
-                    alt={loc.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                  <Link href={`/stay/${loc.slug}`}>
+                    <img 
+                      src={loc.image} 
+                      alt={loc.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </Link>
                   <div className="absolute top-6 left-6 p-4 bg-brand-cream/90 backdrop-blur-sm rounded-full text-brand-terracotta">
                     <loc.icon size={24} />
                   </div>
@@ -98,9 +67,9 @@ export default function StayPage() {
                     >
                       Book Now
                     </Button>
-                    <a href={`https://wa.me/40786258244?text=I'm interested in booking a stay at ${loc.name}`} className="flex-1">
-                      <Button variant="outline" size="lg" className="w-full">WhatsApp Us</Button>
-                    </a>
+                    <Link href={`/stay/${loc.slug}`} className="flex-1">
+                      <Button variant="outline" size="lg" className="w-full">View Details</Button>
+                    </Link>
                   </div>
                 </div>
               </div>
