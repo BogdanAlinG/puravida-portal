@@ -29,7 +29,7 @@ export const Navbar = () => {
     [isHome ? "rgba(249, 247, 242, 0)" : "rgba(249, 247, 242, 0.8)", "rgba(249, 247, 242, 0.8)"]
   );
   
-  const backdropBlur = useTransform(
+  const backdropFilter = useTransform(
     scrollY,
     [0, 100],
     ["blur(0px)", "blur(12px)"]
@@ -43,7 +43,7 @@ export const Navbar = () => {
 
   return (
     <motion.header
-      style={{ backgroundColor, backdropBlur, boxShadow: shadow }}
+      style={{ backgroundColor, backdropFilter, boxShadow: shadow }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
       <nav className="container mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
