@@ -6,3 +6,4 @@
 | Optimize Hero Images with `next/image` | [ ] | P1 |
 | Add `backdrop-blur` to Button hover states | [ ] | P2 |
 | Audit Heading hierarchy consistency | [ ] | P3 |
+| Fix booking bar fields ("Check-in" and "Travelers") | [ ] | P0 |

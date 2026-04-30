@@ -14,15 +14,43 @@ interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   locationName: string;
+  initialView?: "calendar" | "guests" | "default";
+  initialDateRange?: DateRange;
+  initialGuests?: number;
 }
 
-export const StayBookingModal = ({ isOpen, onClose, locationName }: BookingModalProps) => {
+export const StayBookingModal = ({ 
+  isOpen, 
+  onClose, 
+  locationName, 
+  initialView,
+  initialDateRange,
+  initialGuests
+}: BookingModalProps) => {
   const [isSubmitted, setIsSubmitted] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from: undefined,
-    to: undefined,
-  });
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>(initialDateRange);
+  const [guests, setGuests] = React.useState<number>(initialGuests || 1);
   const [showCalendar, setShowCalendar] = React.useState(false);
+  const guestsInputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      if (initialDateRange) setDateRange(initialDateRange);
+      if (initialGuests) setGuests(initialGuests);
+      
+      if (initialView === "calendar") {
+        setShowCalendar(true);
+      } else if (initialView === "guests") {
+        setShowCalendar(false);
+        setTimeout(() => {
+          guestsInputRef.current?.focus();
+          guestsInputRef.current?.select();
+        }, 100);
+      } else {
+        setShowCalendar(false);
+      }
+    }
+  }, [isOpen, initialView, initialDateRange, initialGuests]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -212,9 +240,12 @@ export const StayBookingModal = ({ isOpen, onClose, locationName }: BookingModal
                             <div className="relative">
                               <Users className="absolute right-0 top-3 text-brand-charcoal/20" size={16} />
                               <input 
+                                ref={guestsInputRef}
                                 type="number" 
                                 placeholder="Guests" 
                                 min="1"
+                                value={guests}
+                                onChange={(e) => setGuests(parseInt(e.target.value) || 1)}
                                 className="w-full bg-transparent border-b border-brand-charcoal/10 py-3 text-sm focus:outline-none focus:border-brand-terracotta transition-colors" 
                               />
                             </div>

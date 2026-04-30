@@ -13,6 +13,10 @@ import { MapPin, Waves, Mountain, ArrowRight, Compass, Calendar, Star, Sparkles 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { StayBookingModal } from "@/components/features/StayBookingModal";
+import { Calendar as CalendarUI } from "@/components/ui/Calendar";
+import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
+import { Minus, Plus } from "lucide-react";
 
 const atmospheres = [
   {
@@ -44,8 +48,25 @@ const atmospheres = [
 export default function TourismHome() {
   const [activeAtmosphere, setActiveAtmosphere] = React.useState<typeof atmospheres[0] | null>(null);
   const [isBookingOpen, setIsBookingOpen] = React.useState(false);
+  const [bookingView, setBookingView] = React.useState<"calendar" | "guests" | "default">("default");
   const [selectedLocation, setSelectedLocation] = React.useState("Any Location");
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
+  const [guests, setGuests] = React.useState(1);
+  const [activePopover, setActivePopover] = React.useState<"calendar" | "guests" | null>(null);
+
   const { scrollYProgress } = useScroll();
+
+  // Close popovers on click outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".booking-popover") && !target.closest(".booking-trigger")) {
+        setActivePopover(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   return (
@@ -129,16 +150,95 @@ export default function TourismHome() {
                     ))}
                   </select>
                 </div>
-                <div className="flex-1 px-8 py-4 text-left border-r border-white/10 group cursor-pointer hover:bg-white/5 transition-colors">
+                <div 
+                  onClick={() => setActivePopover(activePopover === "calendar" ? null : "calendar")}
+                  className={cn(
+                    "flex-1 px-8 py-4 text-left border-r border-white/10 group cursor-pointer hover:bg-white/5 transition-colors relative booking-trigger",
+                    activePopover === "calendar" && "bg-white/10"
+                  )}
+                >
                   <div className="text-[10px] uppercase tracking-[0.2em] text-brand-terracotta font-bold mb-1">Check-in</div>
-                  <div className="text-sm font-medium text-white/50 italic">Select Dates</div>
+                  <div className={cn("text-sm font-medium transition-colors", dateRange?.from ? "text-white" : "text-white/50 italic")}>
+                    {dateRange?.from ? (
+                      dateRange.to ? `${format(dateRange.from, "MMM d")} - ${format(dateRange.to, "MMM d")}` : format(dateRange.from, "MMM d")
+                    ) : "Select Dates"}
+                  </div>
+
+                  {/* Calendar Popover */}
+                  <AnimatePresence>
+                    {activePopover === "calendar" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-brand-charcoal border border-white/10 rounded-sm shadow-2xl p-4 z-[100] booking-popover w-[320px]"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <CalendarUI
+                          mode="range"
+                          selected={dateRange}
+                          onSelect={(range) => {
+                            setDateRange(range);
+                          }}
+                          numberOfMonths={1}
+                          disabled={{ before: new Date() }}
+                          className="bg-transparent text-white"
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <div className="flex-1 px-8 py-4 text-left group cursor-pointer hover:bg-white/5 transition-colors">
+
+                <div 
+                  onClick={() => setActivePopover(activePopover === "guests" ? null : "guests")}
+                  className={cn(
+                    "flex-1 px-8 py-4 text-left group cursor-pointer hover:bg-white/5 transition-colors relative booking-trigger",
+                    activePopover === "guests" && "bg-white/10"
+                  )}
+                >
                   <div className="text-[10px] uppercase tracking-[0.2em] text-brand-terracotta font-bold mb-1">Travelers</div>
-                  <div className="text-sm font-medium text-white/50 italic">Add Guests</div>
+                  <div className={cn("text-sm font-medium transition-colors", guests > 0 ? "text-white" : "text-white/50 italic")}>
+                    {guests > 0 ? `${guests} ${guests === 1 ? 'Guest' : 'Guests'}` : "Add Guests"}
+                  </div>
+
+                  {/* Guest Picker Popover */}
+                  <AnimatePresence>
+                    {activePopover === "guests" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 bg-brand-charcoal border border-white/10 rounded-sm shadow-2xl p-6 z-[100] min-w-[200px] booking-popover"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <div className="flex items-center justify-between gap-8">
+                          <span className="text-white font-medium">Guests</span>
+                          <div className="flex items-center gap-4">
+                            <button 
+                              onClick={() => setGuests(Math.max(1, guests - 1))}
+                              className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+                            >
+                              <Minus size={14} />
+                            </button>
+                            <span className="text-white font-bold w-4 text-center">{guests}</span>
+                            <button 
+                              onClick={() => setGuests(guests + 1)}
+                              className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+                            >
+                              <Plus size={14} />
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
+                
                 <Button
-                  onClick={() => setIsBookingOpen(true)}
+                  onClick={() => {
+                    setBookingView("default");
+                    setIsBookingOpen(true);
+                  }}
                   className="bg-brand-terracotta h-16 px-10 rounded-full flex items-center justify-center hover:scale-105 transition-transform font-bold tracking-widest text-xs"
                 >
                   CHECK AVAILABILITY
@@ -438,7 +538,10 @@ export default function TourismHome() {
       <StayBookingModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
-        locationName="Pura Vida Stays"
+        locationName={selectedLocation === "Any Location" ? "Pura Vida Stays" : selectedLocation}
+        initialView={bookingView}
+        initialDateRange={dateRange}
+        initialGuests={guests}
       />
       <Footer />
     </div>
