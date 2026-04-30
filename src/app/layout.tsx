@@ -26,6 +26,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body
         className={`${inter.variable} ${playfair.variable} font-sans min-h-full flex flex-col antialiased bg-brand-cream text-brand-charcoal`}
+        suppressHydrationWarning
       >
         {children}
       </body>

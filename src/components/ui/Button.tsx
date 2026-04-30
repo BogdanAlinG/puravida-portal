@@ -14,9 +14,9 @@ const buttonVariants = cva(
         primary:
           "bg-brand-terracotta text-white shadow-sm hover:bg-brand-terracotta/90 hover:scale-[1.02] active:scale-[0.98]",
         secondary:
-          "border border-brand-sage bg-transparent text-brand-sage hover:bg-brand-sage hover:text-white hover:scale-[1.02] active:scale-[0.98]",
-        ghost: "hover:bg-brand-sage/10 text-brand-charcoal hover:text-brand-sage",
-        outline: "border border-brand-charcoal/20 bg-transparent hover:bg-brand-charcoal/5",
+          "border border-brand-sage bg-transparent text-brand-sage hover:bg-brand-sage/10 hover:backdrop-blur-sm hover:text-brand-sage hover:scale-[1.02] active:scale-[0.98]",
+        ghost: "hover:bg-brand-sage/10 hover:backdrop-blur-sm text-brand-charcoal hover:text-brand-sage",
+        outline: "border border-brand-charcoal/20 bg-transparent hover:bg-brand-charcoal/5 hover:backdrop-blur-sm",
       },
       size: {
         default: "h-12 px-8 py-2",

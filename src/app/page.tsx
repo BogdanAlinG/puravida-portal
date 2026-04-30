@@ -6,8 +6,9 @@ import { Section } from "@/components/layout/Section";
 import { H1, H2, H3, Text, Accent } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { Footer } from "@/components/layout/Footer";
+import Image from "next/image";
 import { stayLocations } from "@/lib/data/stays";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { MapPin, Waves, Mountain, ArrowRight, Compass, Calendar, Star, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -65,10 +66,12 @@ export default function TourismHome() {
               style={{ y }}
               className="absolute inset-0"
             >
-              <img
-                src={activeAtmosphere?.image || "https://puravidahuts.com/wp-content/uploads/2023/07/Pura-Vida-Tiny-House-Village-Rasnov_Desene-cu-lumina-44-scaled.jpg"}
-                className="w-full h-full object-cover brightness-[0.35]"
+              <Image
+                src={activeAtmosphere?.image || "https://puravidahuts.com/wp-content/uploads/2024/06/Pura-Vida-Huts-Vama-Veche-Desene-cu-lumina-17.jpg"}
+                fill
+                className="object-cover brightness-[0.35]"
                 alt="Pura Vida Experience"
+                priority
               />
             </motion.div>
           </div>
