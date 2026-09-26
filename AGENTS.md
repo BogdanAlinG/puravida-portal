@@ -6,12 +6,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Model selection and accepted results
 
-Keep the existing global/project orchestration, provider-access, ownership, verification and release workflows authoritative. Use `route-model-work` as model-selection advice within those workflows when available; it supplies no delegation permission and does not replace required skills. If an existing model policy differs, reconcile it before applying these pilot choices.
+Apply the global Model Selection And Accepted Results policy while preserving this project's workflows, delegation restrictions, ownership, provider boundaries, and verification/release gates. Keep shared worker definitions and defaults global; do not add project overrides for them.
 
-Pilot starting choices: Astra High for ambiguous or consequential decisions and cross-system diagnosis; Sol High for substantial implementation with an established approach; Luna High (Medium for mechanical work) for bounded, objectively checkable changes. Preserve explicit user model/effort choices. Use Max deliberately and prefer Standard when supported. Finish trivial work directly when handoff costs more.
+If global guidance is unavailable, use Astra High for ambiguity or consequential diagnosis, Sol High for established implementation, and Luna High (Medium for mechanical work) for bounded changes with reliable checks. Preserve explicit user model/effort choices and use Standard speed. Routing does not grant delegation permission; when authorized, use at most two workers and respect any stricter limit. Finish trivial work directly.
 
-For meaningful work, define outcome, invariants, scope and acceptance checks through the existing workflow. A repeated conceptual failure requires changed evidence, diagnosis or model. Keep brief acceptance, correction and actual usage evidence in the existing task record; label unavailable runtime identity or usage honestly. Do not add mandatory workers, a new orchestration pipeline, or project configuration overrides to implement this advice.
+Check the full brief and record actual settings, acceptance checks, corrections, and available usage in the existing task record or final report. Mark unavailable measurements honestly; escalate repeated conceptual errors or expanding risk. A role name alone does not verify the runtime model.
 
 ### Project-specific routing
 
-Confirm the current application routes, data model and test commands before implementation; its README is a generic Next.js scaffold and does not establish business requirements. Use Astra for unresolved product/data/auth architecture, Sol for specified features, and Luna for established patterns with focused checks. Preserve the framework guidance above.
+Confirm current routes, data model, requirements, and test commands before implementation; scaffold documentation alone does not define business requirements. Use Astra for unresolved product/data/auth architecture, Sol for specified features, and Luna for established patterns with focused checks. Preserve the framework guidance.
