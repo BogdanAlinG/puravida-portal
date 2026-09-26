@@ -1,5 +1,0 @@
-# Task routing only; preserve runtime/project delegation and approval restrictions.
-[agents]
-max_concurrent_threads_per_session = 2
-default_subagent_model = "gpt-6-sol"
-default_subagent_reasoning_effort = "high"

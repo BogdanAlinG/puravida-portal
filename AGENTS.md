@@ -6,13 +6,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Model selection and accepted results
 
-Use the global `route-model-work` skill when available. Its model choices are pilot defaults, not guarantees: **Astra High** for ambiguity, architecture, consequential research or cross-system diagnosis; **Sol High** for substantial implementation with an established approach; **Luna High** (Medium for mechanical work) for bounded changes with reliable checks. Use Max deliberately and prefer Standard speed when supported. Finish tiny tasks directly when handoff would cost more.
+Keep the existing global/project orchestration, provider-access, ownership, verification and release workflows authoritative. Use `route-model-work` as model-selection advice within those workflows when available; it supplies no delegation permission and does not replace required skills. If an existing model policy differs, reconcile it before applying these pilot choices.
 
-Before meaningful work, establish outcome, invariants, permitted scope, unresolved decisions and acceptance checks. After a diagnosed correction, a repeated conceptual failure requires changed evidence, diagnosis or model. Check rendered fidelity as well as technical correctness for visual work.
+Pilot starting choices: Astra High for ambiguous or consequential decisions and cross-system diagnosis; Sol High for substantial implementation with an established approach; Luna High (Medium for mechanical work) for bounded, objectively checkable changes. Preserve explicit user model/effort choices. Use Max deliberately and prefer Standard when supported. Finish trivial work directly when handoff costs more.
 
-This policy and the `.codex/agents/model-policy-*.toml` roles do not grant delegation permission or override any existing safety, provider, review or release rule. When delegation is permitted, use at most two concurrent workers, one writer per worktree, and explicit model plus effort. Do not assume a role label or configuration proves which model ran. Hosted chat model selection remains explicit.
-
-For meaningful tasks, add requested/effective settings and evidence (or unavailable), acceptance/checks, correction rounds, measured usage/intervention (or unavailable), and follow-up defects to the existing task/PR record. Count planning, workers, reviews and retries; do not estimate subscription usage from API prices. Keep trivial tasks free of extra paperwork.
+For meaningful work, define outcome, invariants, scope and acceptance checks through the existing workflow. A repeated conceptual failure requires changed evidence, diagnosis or model. Keep brief acceptance, correction and actual usage evidence in the existing task record; label unavailable runtime identity or usage honestly. Do not add mandatory workers, a new orchestration pipeline, or project configuration overrides to implement this advice.
 
 ### Project-specific routing
 
